@@ -7,15 +7,15 @@ type Props = {}
 
 export default function Navbar({ }: Props) {
     return (
-        <nav className='sticky top-0 left-0 z-50 bg-slate-900 px-4'>
-            <div className='flex justify-between items-center'>
-                <div className='flex gap-2 p-4'>
-                    <h2 className='text-gray-50 text-3xl font-bold'>Weather</h2>
-                    <IoIosPartlySunny className='text-gray-50 text-3xl' />
+        <nav className='sticky top-0 left-0 z-50 flex justify-center w-full px-4 bg-gradient-to-b from-neutral-950 to-neutral-900'>
+            <div className='flex justify-between max-w-7xl w-full items-center'>
+                <div className='flex gap-2 py-4 items-center'>
+                    <h2 className='text-3xl font-bold'>Weather</h2>
+                    <IoIosPartlySunny className='text-3xl text-yellow-500' />
                 </div>
-                <section className='flex gap-2 items-center text-gray-50'>
-                    <MdMyLocation className=' text-gray-50 text-3xl' />
-                    <FaLocationDot className=' text-gray-50 text-3xl' />
+                <section className='flex gap-2 items-center text-neutral-50'>
+                    <MdMyLocation className='text-xl text-neutral-50/50' />
+                    <FaLocationDot className='text-2xl ' />
                     <p>Colombia</p>
                     <div>
                         <SearchBox />
