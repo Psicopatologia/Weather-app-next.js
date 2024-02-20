@@ -1,12 +1,15 @@
 "use client";
 import Container from "@/components/Container";
 import Navbar from "@/components/Navbar";
+import WeatherDetails from "@/components/WeatherDetails";
 import WeatherIcon from "@/components/WeatherIcon";
 import { convertKelvinToCelsius } from "@/utils/convertKelvinToCelsius";
+import { convertWindSpeed } from "@/utils/convertWindSpeed";
 import getDayOrNightIcon from "@/utils/getDayOrNightIcon";
+import { metersToKilometers } from "@/utils/metersToKilometers";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { format, parseISO } from "date-fns";
+import { format, fromUnixTime, parseISO } from "date-fns";
 import Image from "next/image";
 import { AiOutlineLoading } from "react-icons/ai";
 
@@ -133,9 +136,30 @@ export default function Home() {
               </Container>
             </div>
           </div>
-        </section>
-        <section>
+          <div className="flex gap-4">
+            <Container className="w-fit items-center flex flex-col px-4">
+              <p className="capitalize">{firstData?.weather[0].description}</p>
+              <WeatherIcon iconName={getDayOrNightIcon(firstData?.weather[0].icon ?? '', firstData?.dt_txt ?? '')} />
+            </Container>
+            <Container className="bg-yellow-500 justify-around shadow-inner shadow-yellow-500 px-4 gap-4 overflow-x-auto">
+              <WeatherDetails
+                visibility={metersToKilometers(firstData?.visibility ?? 10000)}
+                airPressure={`${firstData?.main.pressure} hPa`}
+                humidity={`${firstData?.main.humidity}%`}
+                windSpeed={convertWindSpeed(firstData?.wind.speed ?? 3)}
+                sunrise={format(fromUnixTime(data?.city.sunrise ?? 1708341477), "H:mm")}
+                sunset={format(fromUnixTime(data?.city.sunset ?? 1708384478), "H:mm")}
 
+              />
+            </Container>
+          </div>
+        </section>
+        {/* 7 day forecast data */}
+        <section>
+          <h2 className="flex gap-2 items-end">
+            <p className="text-2xl font-bold ">Forecast</p>
+            <p className="text-lg">(7 days)</p>
+          </h2>
         </section>
       </main>
     </div>
