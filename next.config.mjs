@@ -2,14 +2,9 @@
 const nextConfig = {
   basePath: "/Weather-app-next.js",
   output: "export",
+  reactStrictMode: true,
   images: {
-    remotePatterns: [
-      {
-        protocol: "https",
-        hostname: "openweathermap.org",
-        pathname: "**",
-      },
-    ],
+    unoptimized: true,
   },
 };
 
